@@ -1,0 +1,211 @@
+<html>
+<head>
+
+</head>
+
+<style>
+.head-container {
+    position: relative;
+}
+.slide-action {
+    width: 100%;
+    height: 20vw;
+    background-color: #c2e2f8;
+    position: relative;
+    left: -5;
+    transition: 0.3s width ease-in-out, 0.3s position ease-in-out, 0.3s opacity ease-in-out;
+}
+
+.head-text {
+    opacity: 0;
+    width: fit-content;
+    transition: 1s opacity ease-in-out;
+    position: relative;
+    top: 30%;
+    right:0;
+    margin: 0;
+}
+
+.visor-div {
+    width: 100%;
+    height: 5vw;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    /* z-index: 0; */
+    background-color: #c2e2f8;
+}
+
+
+.scroll-text {
+    position: absolute;
+    left: 38%;
+    bottom: 25%;
+    opacity: 0;
+    transition: 1s all ease-in-out;
+
+}
+
+.slide-down-arrow {
+    width: 35px;
+    height: 35px;
+    background-image: url('./Blue_arrow2.png');
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    position: absolute;
+    left: 45%;
+    bottom: -15%;
+    transition: 0.6s opacity ease-in-out;
+    opacity: 0;
+}
+.slide-down-arrow.s1 {
+    bottom: 1%;
+}
+
+
+.mid-content {
+    height: 100vh;
+}
+
+
+@media only screen and (min-width: 1300px) {
+    .slide-down-arrow.s2 {
+        bottom: 8%;
+    }
+}
+
+</style>
+
+<body>
+
+    <div class='head-container'>
+        <div class="slide-action">
+            <h1 class='head-text'> </h1>
+            <div class='visor-div'></div>
+        </div>
+
+        <hr>
+        
+        <div class="scroll-text">Scroll down to begin ... </div>
+
+        <div class="slide-down-arrow s1" ></div>
+        <div class="slide-down-arrow s2"></div>
+
+
+    </div> 
+
+    <div class='mid-content mc1'>
+
+    </div>
+
+</body>
+
+
+
+
+<script>
+let slider = document.querySelector('.slide-action');
+let header = document.querySelector('.head-text');
+let w_text = 'Welcome Text....';
+let visor_div = document.querySelector('.visor-div');
+let scroll_down_text = document.querySelector('.scroll-text');
+
+let intervals = []
+let time_out_base = 500;
+
+
+slider.style.width = 0 + 'px';
+// slider.style.height = 0 + 'px';
+
+setTimeout(
+    ()=>{
+        slider.style.width = 100+ '%';
+        slider.style.height = 20 + 'vw';
+        slider.style.left = 0 + '';
+        
+
+    }, time_out_base
+)
+
+
+setTimeout(
+    () => {
+        header.innerHTML = w_text;
+        header.style.opacity = '1';
+
+        visor_div.style.transition = '1.5s all ease-in-out';
+        visor_div.style.width = 0 + 'px';
+        visor_div.style.left = 60 + '%';
+        
+
+        
+    }, time_out_base
+);
+
+setTimeout(() => {scroll_down_text.style.opacity = '1';}, time_out_base + 1300);
+
+setTimeout(()=>{
+    visor_div.remove();
+}, 2000)
+
+
+function handleArrows() {
+    let arrows = document.querySelectorAll('.slide-down-arrow');
+
+    setTimeout( function(){
+        arrows.forEach(
+        (elm) => {
+            elm.style.opacity = '1';
+        }
+        );
+    }
+    , time_out_base + 1000 );
+
+    let firstArrow = document.querySelector('.slide-down-arrow.s1');
+    let secondArrow = document.querySelector('.slide-down-arrow.s2');
+
+    setTimeout( function(){
+        // scroll_down_text.style.opacity = '1';
+        let arr_interval = setInterval(() => {
+            firstArrow.style.opacity = '0';
+            setTimeout(() => { secondArrow.style.opacity='0' }, 300);
+
+            setTimeout(() => { firstArrow.style.opacity='1' }, 600);
+            setTimeout(() => { secondArrow.style.opacity='1' }, 700);
+
+
+        }, 1000 + 400);
+
+        intervals.push(arr_interval);
+
+    }
+    , time_out_base + 200 );
+
+    setTimeout(function(){
+        // remove arrows when scrolled
+        window.onscroll = function() {
+            console.log('scrolling');
+            intervals.forEach((intv)=>{clearInterval(intv)})
+            arrows.forEach(
+                (elm) => {
+                    elm.remove();
+                    }
+                );
+            scroll_down_text.remove();
+        };
+    }, time_out_base + 1000);
+
+    
+}
+
+
+
+
+
+// -------  function calls --------
+handleArrows();
+
+</script>
+
+</html>
