@@ -1,0 +1,34 @@
+<style type="text/css">
+  .accordion-expanded {
+  height: auto;
+  opacity: 1;
+}
+.accordion-collapsed {
+  height: 0px;
+  opacity: 0;
+  overflow: hidden;
+}
+</style>
+
+
+
+ <button class="accordion-button" onclick="expandCollapseAccordion(this)">
+            Surgical History
+</button>
+<div class="form-field-card">
+  some 2 card contents
+</div>
+
+
+
+<script>
+  function expandCollapseAccordion (clickdButton) {
+
+  // get the panel that is associated with the clicked button (to expand/collapse it)
+  let accordionPanel = clickdButton.nextElementSibling;
+  
+  accordionPanel.classList.toggle('accordion-collapsed');
+  accordionPanel.classList.toggle('accordion-expanded');
+  
+}
+</script>

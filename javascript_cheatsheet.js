@@ -49,3 +49,8 @@ window.onscroll = function(){
 
 // change css - change style
 document.elm.style.border = "3px solid #FF0000"
+
+
+
+// next sibling - good for accordion
+document.getElementById("item1").nextElementSibling
