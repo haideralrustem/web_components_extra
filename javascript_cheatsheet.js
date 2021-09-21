@@ -54,3 +54,16 @@ document.elm.style.border = "3px solid #FF0000"
 
 // next sibling - good for accordion
 document.getElementById("item1").nextElementSibling
+
+
+
+// get radio value
+document.querySelector('input[name="genderS"]:checked').value;
+document.forms.history_form.elements.input-name.value
+
+
+
+// incldues - substring - string contains - string.contains
+str.toLowerCase().includes("world") 
+
+//
